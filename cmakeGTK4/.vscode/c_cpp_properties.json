@@ -22,8 +22,6 @@
                 "/usr/include/at-spi2-atk/2.0/**",
                 "/usr/include/at-spi-2.0/**",
                 "/usr/include/dbus-1.0/**",
-                "/usr/include/graphene-1.0/**",
-                "/usr/lib/**/graphene-1.0/include/**",
                 "/usr/lib/**/dbus-1.0/include/**"
             ],
             "intelliSenseMode": "linux-gcc-x64",
