@@ -2,12 +2,15 @@
 
 echo "🐚 SETUP XONSH"
 
-# check if the xonsh is on the path if not install it
-if command -v xonsh &> /dev/null; then
+# check if xonsh is on $HHOME/.local/bin
+if [ -f "$HOME/.local/bin/xonsh" ]; then
     echo "xonsh is already installed"
     echo "all ok ✅"
     exit 0
 fi
+
+# fail as soon as a command fails, and return the exit status
+set -e
 
 pipx install xonsh
 pipx inject xonsh distro
