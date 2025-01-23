@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build & Deploy TorizonCore
     container:
-      image: commontorizon/torizon-dev:next
+      image: torizonextras/torizon-dev:dev
     steps:
       - uses: actions/checkout@v3
       - uses: actions/cache@v3
@@ -21,34 +21,33 @@ jobs:
           echo "${{ github.workspace }}" >> abs-path
           cat abs-path
 
-      - name: Initial Setup
-        shell: bash
+      - name: Decode Credentials
         env:
           PLATFORM_CREDENTIALS: ${{ secrets.PLATFORM_CREDENTIALS }}
         run: |
           echo $PLATFORM_CREDENTIALS | base64 -d > credentials.zip
 
       - name: Build TorizonCore Image
-        shell: pwsh
+        shell: xonsh {0}
         run: |
-          ./.vscode/tasks.ps1 run tcb-setup
-          ./.vscode/tasks.ps1 run tcb-build
+          xonsh ./.vscode/tasks.xsh run tcb-setup
+          xonsh ./.vscode/tasks.xsh run tcb-build
 
       - name: Push OS Package to Platform
-        shell: pwsh
+        shell: xonsh {0}
         env:
           PLATFORM_CLIENT_ID: ${{ secrets.PLATFORM_CLIENT_ID }}
           PLATFORM_CLIENT_SECRET: ${{ secrets.PLATFORM_CLIENT_SECRET }}
         run: |
-          ./.vscode/tasks.ps1 run tcb-setup
-          ./.vscode/tasks.ps1 run tcb-platform-push-ostree
+          xonsh ./.vscode/tasks.xsh run tcb-setup
+          xonsh ./.vscode/tasks.xsh run tcb-platform-push-ostree
 
       - name: Deploy to Fleet
-        shell: pwsh
+        shell: xonsh {0}
         env:
           TASKS_OVERRIDE_ENV: "False"
           PLATFORM_CLIENT_ID: ${{ secrets.PLATFORM_CLIENT_ID }}
           PLATFORM_CLIENT_SECRET: ${{ secrets.PLATFORM_CLIENT_SECRET }}
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |
-          ./.vscode/tasks.ps1 run platform-update-fleet
+          xonsh ./.vscode/tasks.xsh run platform-update-fleet

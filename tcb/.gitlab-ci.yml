@@ -18,7 +18,7 @@ stages:
 tcb-build:
   stage: build
   image:
-    name: commontorizon/pwsh-gitlab:next
+    name: torizonextras/xonsh-wrapper:dev
 
   variables:
     TASKS_ITERATIVE: "False"
@@ -29,7 +29,7 @@ tcb-build:
       ./.vscode/tasks.ps1 run tcb-setup
       ./.vscode/tasks.ps1 run tcb-build
 
-    ' | gitlabWrapper.ps1
+    ' | xonsh-wrapper.xsh
 
   cache:
     key: tcb-build
@@ -44,7 +44,7 @@ push-package-to-platform:
     - tcb-build
   stage: platform
   image:
-    name: commontorizon/pwsh-gitlab:next
+    name: torizonextras/xonsh-wrapper:dev
 
   variables:
     TASKS_ITERATIVE: "False"
@@ -56,7 +56,7 @@ push-package-to-platform:
       ./.vscode/tasks.ps1 run tcb-setup
       ./.vscode/tasks.ps1 run tcb-platform-push-ostree
 
-    ' | gitlabWrapper.ps1
+    ' | xonsh-wrapper.xsh
 
   cache:
     key: tcb-build
@@ -72,7 +72,7 @@ update-fleet:
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
   image:
-    name: commontorizon/pwsh-gitlab:next
+    name: torizonextras/xonsh-wrapper:dev
 
   variables:
     TASKS_ITERATIVE: "False"
@@ -84,4 +84,4 @@ update-fleet:
 
       ./.vscode/tasks.ps1 run platform-update-fleet
 
-    ' | gitlabWrapper.ps1
+    ' | xonsh-wrapper.xsh
