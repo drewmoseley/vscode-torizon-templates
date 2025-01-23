@@ -450,6 +450,20 @@ def _tasks_apply_dto(args):
             @(args.dto_list)
 
 
+def _fetch(args):
+    # first remove the folder
+    if os.path.exists(f"{os.environ['HOME']}/.apollox"):
+        rm -rf @(f"{os.environ['HOME']}/.apollox")
+
+    # then clone it from scratch
+    os.chdir(f"{os.environ['HOME']}")
+
+    git clone --branch @(args.branch) @(args.url) .apollox
+
+    if args.tag != "next":
+        git checkout @(args.tag)
+
+
 class PrintVersionAction(argparse.Action):
     def __call__(self, parser, namespace, values, option_string=None):
         distro_info = distro.os_release_info()
@@ -654,6 +668,30 @@ parser_tasks_run.add_argument(
 )
 parser_tasks_run.set_defaults(func=_tasks_run)
 # ------------------------------------------------------------------------ TASKS
+
+
+# ------------------------------------------------------------------------ FETCH
+parser_fetch = subparser.add_parser(
+    "fetch",
+    help="Fetch the latest version of the templates repo"
+)
+parser_fetch.add_argument(
+    "--url", "-u",
+    help="The URL of the templates repo",
+    default="https://github.com/torizon/vscode-torizon-templates.git"
+)
+parser_fetch.add_argument(
+    "--branch", "-b",
+    help="The branch from the templates repo to fetch",
+    default="dev"
+)
+parser_fetch.add_argument(
+    "--tag", "-t",
+    help="The tag from the templates repo to fetch",
+    default="next"
+)
+parser_fetch.set_defaults(func=_fetch)
+# ------------------------------------------------------------------------ FETCH
 
 
 # ---------------------------------------------------------------------- VERSION
