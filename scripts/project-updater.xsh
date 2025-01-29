@@ -151,7 +151,7 @@ if not second_run:
     _git_status: CommandPipeline = {}
     _git_status = !(git -C @(project_folder) status)
 
-    if "fatal: not a git repository" in _git_status.err:
+    if _git_status.err != None and "fatal: not a git repository" in _git_status.err:
         print(
             "❌ fatal: this workspace is not a git repository.",
             color=Color.RED
