@@ -2,8 +2,12 @@
 param()
 
 # include
-. "$env:HOME/.apollox/scripts/utils/formatJson.ps1"
-. "$env:HOME/.apollox/scripts/utils/replaceTasksInput.ps1"
+if ( Test-Path -Path "$env:HOME/.apollox/scripts/utils/formatJson.ps1" ) {
+    . "$env:HOME/.apollox/scripts/utils/formatJson.ps1"
+}
+if ( Test-Path -Path "$env:HOME/.apollox/scripts/utils/replaceTasksInput.ps1" ) {
+    . "$env:HOME/.apollox/scripts/utils/replaceTasksInput.ps1"
+}
 
 $errorActionPreference = "Stop"
 
