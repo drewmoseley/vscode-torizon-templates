@@ -74,6 +74,8 @@ dkms.conf
 
 #Build directories
 build-*
+#But the build yaml file from ci/cd need to be included
+!.github/workflows/build-*
 
 # End of https://www.gitignore.io/api/c,c++,cmake
 
