@@ -151,7 +151,7 @@ if not second_run:
     _git_status: CommandPipeline = {}
     _git_status = !(git -C @(project_folder) status)
 
-    if "fatal: not a git repository" in _git_status.err:
+    if _git_status.err != None and "fatal: not a git repository" in _git_status.err:
         print(
             "❌ fatal: this workspace is not a git repository.",
             color=Color.RED
@@ -777,5 +777,11 @@ print("✅ specific files OK", color=Color.GREEN)
 
 # clean up tmp
 rm -rf @(f"{project_folder}/.conf/tmp")
+
+# update metadata.json
+_project_metadata_file = open(f"{project_folder}/.conf/metadata.json", "w")
+_project_metadata["torizonOSMajor"] = _templates_metadata["TorizonOSMajor"]
+_project_metadata_file.write(json.dumps(_project_metadata, indent=4))
+_project_metadata_file.close()
 
 print("\n✅ Update done", color=Color.GREEN)

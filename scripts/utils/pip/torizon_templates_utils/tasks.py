@@ -913,12 +913,16 @@ class TaskRunner:
             print(f"Parsed Args: {_args}", color=Color.YELLOW)
             print(f"Parsed Command: {_cmd_join}", color=Color.YELLOW)
 
+        # use bash to execute the VSCode tasks commands and scripts, as they
+        # are written and tested in bash. Valid just for commands of shell
+        # type, not process type ones
         _ret = subprocess.run(
             [_cmd, *_args] if not _shell else _cmd_join,
             stdout=None,
             stderr=None,
             env=os.environ,
-            shell=_shell
+            shell=_shell,
+            executable="/bin/bash" if _shell else None
         )
 
         # go back to the last cwd
@@ -927,4 +931,3 @@ class TaskRunner:
         if _ret.returncode != 0:
             print(f"> TASK [{label}] exited with error code [{_ret.returncode}] <", color=Color.RED)
             raise RuntimeError(f"Error running task: {label}")
-
