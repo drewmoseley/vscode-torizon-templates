@@ -20,7 +20,6 @@ pipx inject xonsh pyyaml
 pipx inject xonsh psutil
 pipx inject xonsh torizon-templates-utils
 pipx inject xonsh GitPython
-pipx inject xonsh xontrib-powerline2
 pipx inject xonsh python-lsp-server
 pipx inject xonsh pylsp-rope
 
