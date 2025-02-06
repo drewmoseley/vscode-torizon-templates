@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Torizon ARMv8",
+            "name": "Torizon arm64",
             "request": "launch",
             "type": "node-terminal",
             "command": "exit",
@@ -10,7 +10,7 @@
             "preLaunchTask": "run-container-torizon-release-arm64"
         },
         {
-            "name": "Torizon ARMv7",
+            "name": "Torizon arm32",
             "request": "launch",
             "type": "node-terminal",
             "command": "exit",

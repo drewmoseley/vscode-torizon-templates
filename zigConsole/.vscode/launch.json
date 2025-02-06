@@ -28,7 +28,7 @@
             "preLaunchTask": "build-debug-amd64"
         },
         {
-            "name": "Torizon ARMv7",
+            "name": "Torizon arm32",
             "type": "cppdbg",
             "request": "launch",
             "program": "${config:torizon_app_root}/__change__",
@@ -75,7 +75,7 @@
             "preLaunchTask": "deploy-torizon-arm"
         },
         {
-            "name": "Torizon ARMv8",
+            "name": "Torizon arm64",
             "type": "cppdbg",
             "request": "launch",
             "program": "${config:torizon_app_root}/__change__",

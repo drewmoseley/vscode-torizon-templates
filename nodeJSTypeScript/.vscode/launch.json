@@ -22,7 +22,7 @@
             "preLaunchTask": "start-torizon-debug-amd64"
         },
         {
-            "name": "Torizon ARMv7",
+            "name": "Torizon arm32",
             "type": "node",
             "request": "attach",
             "port": "${config:torizon_debug_port1}",
@@ -35,7 +35,7 @@
             "preLaunchTask": "start-torizon-debug-arm"
         },
         {
-            "name": "Torizon ARMv8",
+            "name": "Torizon arm64",
             "type": "node",
             "request": "attach",
             "port": "${config:torizon_debug_port1}",
