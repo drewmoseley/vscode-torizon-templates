@@ -42,7 +42,7 @@ echo "Pulling the torizon-dev image ..."
 # we pull everytime we source it to get updates
 docker \
     compose \
-    -f $_TCD_COMPOSE_FILE \
+    -f $__TCD_COMPOSE_FILE \
     pull torizon-dev
 
 function torizon-dev {
