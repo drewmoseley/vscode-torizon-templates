@@ -6,9 +6,6 @@ ARG BRANCH
 
 USER root
 
-# to share the docker socket with the host
-VOLUME /var/run/docker.sock:/var/run/docker.sock
-
 # use docker tools
 COPY --from=docker:dind /usr/local/bin/docker /usr/local/bin/
 COPY --from=docker:dind /usr/local/libexec/docker/cli-plugins /usr/local/lib/docker/cli-plugins
