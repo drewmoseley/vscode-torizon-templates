@@ -6,8 +6,8 @@ services:
       context: ../
       dockerfile: container/Containerfile.xonsh
       args:
-        - BRANCH=${BRANCH}
-    image: torizonextras/xonsh:${BRANCH}
+        - BRANCH=${__TCD_BRANCH}
+    image: torizonextras/xonsh:${__TCD_BRANCH}
 
 
   tasks:
@@ -15,9 +15,9 @@ services:
       context: ../
       dockerfile: container/Containerfile.tasks
       args:
-        - BRANCH=${BRANCH}
+        - BRANCH=${__TCD_BRANCH}
         - REPO=toradex/vscode-torizon-templates
-    image: torizonextras/torizon-dev-tasks:${BRANCH}
+    image: torizonextras/torizon-dev-tasks:${__TCD_BRANCH}
 
 
   xonsh-wrapper:
@@ -25,8 +25,8 @@ services:
       context: ../
       dockerfile: container/Containerfile.wrapper
       args:
-        - BRANCH=${BRANCH}
-    image: torizonextras/xonsh-wrapper:${BRANCH}
+        - BRANCH=${__TCD_BRANCH}
+    image: torizonextras/xonsh-wrapper:${__TCD_BRANCH}
 
 
   torizon-dev:
@@ -34,25 +34,25 @@ services:
       context: ../
       dockerfile: container/Containerfile.dev
       args:
-        - BRANCH=${BRANCH}
-        - UID=${UUID}
-    image: torizonextras/torizon-dev:${BRANCH}
+        - BRANCH=${__TCD_BRANCH}
+        - UID=${__TCD_UUID}
+    image: torizonextras/torizon-dev:${__TCD_BRANCH}
     privileged: true
     network_mode: host
     environment:
       - APOLLOX_TEMPLATES_GIT_REPO=https://github.com/torizon/vscode-torizon-templates.git
-      - APOLLOX_TEMPLATES_GIT_REPO_BRANCH=${BRANCH}
+      - APOLLOX_TEMPLATES_GIT_REPO_BRANCH=${__TCD_BRANCH}
       #- APOLLOX_TEMPLATES_GIT_TAG=
       - WSL_DISTRO_NAME=${WSL_DISTRO_NAME}
       - APOLLOX_CONTAINER=1
-      - UUID=${UUID}
-      - DGID=${DGID}
+      - UUID=${__TCD_UUID}
+      - DGID=${__TCD_DGID}
       - UUSER=${USER}
       - APOLLOX_WORKSPACE=${PWD}
       - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - /run/user/${UUID}:/run/user/${UUID}
+      - /run/user/${__TCD_UUID}:/run/user/${__TCD_UUID}
       - /mnt:/mnt
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/run/dbus:/var/run/dbus
@@ -60,7 +60,7 @@ services:
       - ${HOME}/.tcd/:/home/torizon/.tcd/
       - ${PWD}:/workspace
       - ${PWD}:${PWD}
-    container_name: torizon-dev-${SHA_DIR}
+    container_name: torizon-dev-${__TCD_SHA_DIR}
     stdin_open: true
     tty: true
     pid: host

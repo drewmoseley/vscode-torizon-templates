@@ -24,8 +24,8 @@ if len(sys.argv) != 2:
     print(f"Usage: {sys.argv[0]} <branch>")
     sys.exit(1)
 
-$BRANCH = sys.argv[1]
-$SHA_DIR = 0
+$__TCD_BRANCH = sys.argv[1]
+$__TCD_SHA_DIR = 0
 
 # # run the build command
 print(f"🔨 :: XONSH :: 🔨", color=Color.GREEN)
