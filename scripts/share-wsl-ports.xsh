@@ -20,7 +20,7 @@ from torizon_templates_utils.errors import Error,Error_Out,last_return_code
 from torizon_templates_utils.colors import Color,BgColor,print
 
 # this only make sense for WSL
-if "WSL_DISTRO_NAME" in os.environ:
+if "WSL_DISTRO_NAME" in os.environ and os.environ["WSL_DISTRO_NAME"] != "":
     home = os.environ["HOME"]
     workspace = sys.argv[1]
     exc_remoteport: CommandPipeline = {}

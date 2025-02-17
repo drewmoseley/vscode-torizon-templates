@@ -5,7 +5,7 @@ import subprocess
 
 
 def get_host_ip():
-    if 'WSL_DISTRO_NAME' in os.environ:
+    if 'WSL_DISTRO_NAME' in os.environ and os.environ['WSL_DISTRO_NAME'] != '':
         command = ["/mnt/c/Windows/System32/Wbem/WMIC.exe", "NICCONFIG", "WHERE", "IPEnabled=true", "GET", "IPAddress"]
 
         # if inside a container we need to run the command in the host

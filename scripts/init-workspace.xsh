@@ -64,7 +64,7 @@ else:
 
 
 # mimic the vs code auto run
-if "WSL_DISTRO_NAME" in os.environ:
+if "WSL_DISTRO_NAME" in os.environ and os.environ["WSL_DISTRO_NAME"] != "":
     print("🔧 :: Sharing WSL ports with Windows :: 🔧")
     print("")
 
